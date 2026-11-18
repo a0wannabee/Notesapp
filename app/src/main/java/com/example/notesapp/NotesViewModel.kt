@@ -21,17 +21,19 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         )
 
     // CREATE
-    fun addNote(title: String) {
-        val text = title.trim()
-        if (text.isEmpty()) return
-        viewModelScope.launch { dao.insert(Note(title = text)) }
+    fun addNote(title: String, note: String) {
+        val t = title.trim()
+        val n = note.trim()
+        if (t.isEmpty()) return
+        viewModelScope.launch { dao.insert(Note(title = t, note = n)) }
     }
 
     // UPDATE
-    fun updateNote(note: Note, newTitle: String) {
-        val text = newTitle.trim()
-        if (text.isEmpty()) return
-        viewModelScope.launch { dao.update(note.copy(title = text)) }
+    fun updateNote(note: Note, newTitle: String, newNote: String) {
+        val t = newTitle.trim()
+        val n = newNote.trim()
+        if (t.isEmpty()) return
+        viewModelScope.launch { dao.update(note.copy(title = t, note = n)) }
     }
 
     // DELETE
